@@ -14,3 +14,5 @@ alias pip=pip3.6
 source ~/.bashrc
 yum update -y
 #reboot -y
+# How to use this?
+# wget -O - https://github.com/MrAmbiG/Nux/blob/master/centos7startup.sh | bash
