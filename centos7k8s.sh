@@ -11,6 +11,10 @@ sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm
 sudo systemctl start libvirtd
 sudo systemctl enable libvirtd
 
+# virtualbox
+sudo wget -P /etc/yum.repos.d http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+sudo yum install -y VirtualBox-5.0 # you might want to change it to a newer version
+
 # Install docker
 sudo yum -y install docker
 sudo systemctl enable docker
@@ -46,7 +50,3 @@ sudo echo 'net.bridge.bridge-nf-call-iptables = 1' >> temp.txt
 sudo mv temp.txt /etc/sysctl.d/k8s.conf
 sudo sysctl --system
 echo 1 > /proc/sys/net/ipv4/ip_forward
-
-# virtualbox
-sudo wget -P /etc/yum.repos.d http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
-sudo yum install -y VirtualBox-5.0 # you might want to change it to a newer version
