@@ -1,25 +1,18 @@
 #!/bin/bash
 # tested on AWS CentOS 7.5 ec2-instance
 # Installs docker and kubernetes on a centOS system
-
-##### resources #####
-# https://github.com/kubernetes/minikube/releases
-# https://kubernetes.io/docs/setup/independent/install-kubeadm/
-# https://docs.docker.com/install/linux/docker-ce/centos/#os-requirements
-
 # basic things first. recommended.
+
+# add docker repo if not present
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
 sudo yum -y update
 sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm
 sudo systemctl start libvirtd
 sudo systemctl enable libvirtd
 
-# add docker repo if not present
-sudo yum remove docker docker-common docker-selinux docker-engine
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-
 # Install docker
-sudo yum install docker-ce -y
+sudo yum -y install docker
 sudo systemctl enable docker
 sudo systemctl start docker
 
@@ -54,7 +47,6 @@ sudo mv temp.txt /etc/sysctl.d/k8s.conf
 sudo sysctl --system
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
-# install minikube (optional). This is needed if you want to create, run
-# a local kubernetes cluster with as few as 1 node for development or testing
-# purposes.
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /usr/local/bin/ && rm minikube
+# virtualbox
+sudo wget -P /etc/yum.repos.d http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+sudo yum install -y VirtualBox-5.0 # you might want to change it to a newer version
