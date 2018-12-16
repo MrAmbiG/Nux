@@ -7,7 +7,7 @@
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 sudo yum -y update
-sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm
+sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm kernel-devel kernel-headers gcc make perl wget
 sudo systemctl start libvirtd
 sudo systemctl enable libvirtd
 
