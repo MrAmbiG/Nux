@@ -2,6 +2,11 @@
 # tested on AWS CentOS 7.5 ec2-instance
 # Installs docker and kubernetes on a centOS system
 
+##### resources #####
+# https://github.com/kubernetes/minikube/releases
+# https://kubernetes.io/docs/setup/independent/install-kubeadm/
+# https://docs.docker.com/install/linux/docker-ce/centos/#os-requirements
+
 # basic things first. recommended.
 sudo yum -y update
 sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm
@@ -48,3 +53,8 @@ sudo echo 'net.bridge.bridge-nf-call-iptables = 1' >> temp.txt
 sudo mv temp.txt /etc/sysctl.d/k8s.conf
 sudo sysctl --system
 echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# install minikube (optional). This is needed if you want to create, run
+# a local kubernetes cluster with as few as 1 node for development or testing
+# purposes.
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.31.0/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /usr/local/bin/ && rm minikube
