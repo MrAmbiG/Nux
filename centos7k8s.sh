@@ -1,15 +1,20 @@
 #!/bin/bash
 # tested on AWS CentOS 7.5 ec2-instance
 # Installs docker and kubernetes on a centOS system
-# Just copy paste this to your terminal or run this shell script
+
 # basic things first. recommended.
 sudo yum -y update
 sudo yum -y install qemu-kvm libvirt libvirt-daemon-kvm
 sudo systemctl start libvirtd
 sudo systemctl enable libvirtd
 
+# add docker repo if not present
+sudo yum remove docker docker-common docker-selinux docker-engine
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
 # Install docker
-sudo yum -y install docker
+sudo yum install docker-ce -y
 sudo systemctl enable docker
 sudo systemctl start docker
 
